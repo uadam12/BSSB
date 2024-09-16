@@ -1,0 +1,27 @@
+<tr>
+    <th>S/N</th>
+    <th>Name</th>
+    <th>Actions</th>
+</tr>
+
+{% for inst_type in institution_types %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ inst_type }}</td>
+    <td>
+        <a href="{% url 'academic:update-institution-type' id=inst_type.id %}" class="btn btn-warning">
+            <i class="fa fa-pencil"></i>
+        </a>
+
+        <a href="{% url 'academic:delete-institution-type' id=inst_type.id %}" class="btn btn-danger">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="3" class="text-center text-muted">
+        There is no available institution type
+    </td>
+</tr>
+{% endfor %}

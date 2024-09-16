@@ -1,0 +1,27 @@
+<tr>
+    <th>S/N</th>
+    <th>Name</th>
+    <th>Actions</th>
+</tr>
+
+{% for program in programs %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ program }}</td>
+    <td>
+        <a href="{% url 'academic:update-program' id=program.id %}" class="btn btn-warning">
+            <i class="fa fa-pencil"></i>
+        </a>
+
+        <a href="{% url 'academic:delete-program' id=program.id %}" class="btn btn-danger">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="3" class="text-center text-muted">
+        There is no available program
+    </td>
+</tr>
+{% endfor %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center text-secondary">
+        Manage {{ header }}(s)
+    </h1>
+
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered table-hover table-striped">
+            {% include data_template %}
+        </table>
+    </div>
+
+    <form method="post" class="card">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+
+        <div class="card-header">
+            <h3 class="card-title">
+                Create {{ header }}
+            </h3>
+        </div>
+
+        <div class="card-body">
+            {% crispy form %}
+
+            <div class="text-end">
+                <a href="{% url 'user:dashboard' %}" class="btn btn-primary">
+                    <i class="fa fa-arrow-left"></i> Dashboard
+                </a>
+    
+                <button class="btn btn-success">
+                    Create <i class="fa fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

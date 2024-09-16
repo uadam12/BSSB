@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %} {% csrf_token %} {% load crispy_forms_tags %}
+<h1 class="text-center">Profile Details</h1>
+
+<div class='card mb-2'>
+    <div class="row p-3 align-items-center">
+        <div class="col-md-4">
+            <img src="/media/default-user.svg" class="img d-block" />
+        </div>
+
+        <div class="col-md-8">
+            <div class="d-md-none">
+                <hr>
+            </div>
+
+            <div class="text-center text-md-start">
+                <h3 class="card-title">
+                    {{ user.first_name }} {{ user.last_name }}
+                </h3>
+
+                <p class="card-subtitle">
+                    {{ user.email }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='card mb-2'>
+    <div class="card-header">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#personal">
+                    <i class="fa fa-user"></i>
+                    <span class="d-none d-md-inline">
+                        Personal Information
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#academic">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span class="d-none d-md-inline">
+                        Academic Details
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#account">
+                    <i class="fa fa-bank"></i>
+                    <span class="d-none d-md-inline">
+                        Account Details
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#documents">
+                    <i class="fa fa-file"></i>
+                    <span class="d-none d-md-inline">
+                        Documents
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#referees">
+                    <i class="fa fa-users"></i>
+                    <span class="d-none d-md-inline">
+                        Referees
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class='tab-content'> 
+            <!-- Tab panes -->
+            <div class="tab-pane active" id="personal">
+                <h2 class="text-center">Personal information</h2>
+                <form action="{% url 'applicant-api:save-personal-info' %}" method="post">
+                    {% csrf_token %} {% crispy user_form %}
+
+                    {% crispy applicant_form %}
+                    <hr>
+                    <p class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Personal Information</button>
+                    </p>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="academic">
+                <h2 class="text-center">Academic information</h2>
+                <form action="{% url 'applicant-api:save-academic-info' %}" method="post">
+                    {% csrf_token %}
+                    <!--{{ academic_form|crispy }}-->
+                    {% crispy academic_form %}
+                    <hr>
+                    <p class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Personal Information</button>
+                    </p>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="account">
+                <h2 class="text-center">Bank Account Details</h2>
+                <form action="{% url 'applicant-api:save-academic-info' %}" method="post">
+                    {% csrf_token %}
+                    <!--{{ bank_form|crispy }}-->
+                    {% crispy bank_form %}
+                    <hr>
+                    <p class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Personal Information</button>
+                    </p>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="documents">
+                <h2 class="text-center">Documents</h2>
+            </div>
+
+            <div class="tab-pane fade" id="referees">
+                <h2 class="text-center">Referees Information</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <p class="card-text">Please complete your profile information</p>
+    </div>
+</div>
+{% endblock %}

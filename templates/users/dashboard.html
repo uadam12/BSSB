@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}BSSB Dashboard{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-secondary mt-3">Welcome {{user}}</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{% url 'academic:institution-types' %}" class="btn btn-text">
+                <i class="fa fa-graduation-cap"></i> Manage Institution types
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'academic:institutions' %}" class="btn btn-text">
+                <i class="fa fa-graduation-cap"></i> Manage Institutions
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'academic:programs' %}" class="btn btn-text">
+                <i class="fa fa-graduation-cap"></i> Manage Programs
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'academic:courses' %}" class="btn btn-text">
+                <i class="fa fa-graduation-cap"></i> Manage Courses
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'academic:levels' %}" class="btn btn-text">
+                <i class="fa fa-graduation-cap"></i> Manage Levels
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'main:articles' %}" class="btn btn-text">
+                <i class="fa fa-bank"></i> Manage Articles(News)
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'main:banks' %}" class="btn btn-text">
+                <i class="fa fa-bank"></i> Manage Banks
+            </a>
+        </li>
+
+        <li class="list-group-item">
+            <a href="{% url 'main:lgas' %}" class="btn btn-text">
+                <i class="fa fa-bank"></i> Manage Local Government Area
+            </a>
+        </li>
+    </ul>
+{% endblock %}
