@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
+{% block head_end %}
+{% load static %}
+<script src="{% static 'js/ajax.js' %}"></script>
+{% endblock %}
+
+
 {% block content %} {% csrf_token %} {% load crispy_forms_tags %}
 <h1 class="text-center">Profile Details</h1>
 
 <div class='card mb-2'>
     <div class="row p-3 align-items-center">
         <div class="col-md-4">
-            <img src="/media/default-user.svg" class="img d-block" />
+            <img src="/media/default-user.svg" class="img d-block mx-auto" />
         </div>
 
         <div class="col-md-8">
@@ -83,9 +89,9 @@
             <!-- Tab panes -->
             <div class="tab-pane active" id="personal">
                 <h2 class="text-center">Personal information</h2>
-                <form action="{% url 'applicant-api:save-personal-info' %}" method="post">
-                    {% csrf_token %} {% crispy user_form %}
-
+                <form action="{% url 'applicant-api:save-personal-info' %}" method="post" id="personal-info-form">
+                    {% csrf_token %} 
+                    {% crispy user_form %}
                     {% crispy applicant_form %}
                     <hr>
                     <p class="text-end">
@@ -97,35 +103,45 @@
             <div class="tab-pane fade" id="academic">
                 <h2 class="text-center">Academic information</h2>
                 <form action="{% url 'applicant-api:save-academic-info' %}" method="post">
-                    {% csrf_token %}
-                    <!--{{ academic_form|crispy }}-->
                     {% crispy academic_form %}
                     <hr>
                     <p class="text-end">
-                        <button type="submit" class="btn btn-primary">Save Personal Information</button>
+                        <button type="submit" class="btn btn-primary">Save Academic Information</button>
                     </p>
                 </form>
             </div>
 
             <div class="tab-pane fade" id="account">
                 <h2 class="text-center">Bank Account Details</h2>
-                <form action="{% url 'applicant-api:save-academic-info' %}" method="post">
-                    {% csrf_token %}
-                    <!--{{ bank_form|crispy }}-->
+                <form action="{% url 'applicant-api:save-bank-info' %}" method="post">
                     {% crispy bank_form %}
                     <hr>
                     <p class="text-end">
-                        <button type="submit" class="btn btn-primary">Save Personal Information</button>
+                        <button type="submit" class="btn btn-primary">Save Account Details</button>
                     </p>
                 </form>
             </div>
 
             <div class="tab-pane fade" id="documents">
                 <h2 class="text-center">Documents</h2>
+                <form action="{% url 'applicant-api:save-documents' %}" method="post">
+                    {% crispy documents_form %}
+                    <hr>
+                    <p class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Uploaded</button>
+                    </p>
+                </form>
             </div>
 
             <div class="tab-pane fade" id="referees">
                 <h2 class="text-center">Referees Information</h2>
+                <form action="{% url 'applicant-api:save-referees' %}" method="post">
+                    {% crispy referees_form %}
+                    <hr>
+                    <p class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Referees Information</button>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
@@ -134,4 +150,15 @@
         <p class="card-text">Please complete your profile information</p>
     </div>
 </div>
+{% endblock %}
+
+{% block body_end %}
+<script>
+    const personalInfoForm = document.getElementById('personal-info-form')
+
+    personalInfoForm.addEventListener('submit', e => {
+        e.preventDefault();
+        save(personalInfoForm);
+    });
+</script>
 {% endblock %}

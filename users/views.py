@@ -7,7 +7,9 @@ from .forms import RegisterForm, LoginForm, UserForm
 from applicant.forms import (
     ApplicantForm, Applicant, 
     AcademicInformationForm, AcademicInformation,
-    AccountBankForm, AccountBank
+    AccountBankForm, AccountBank,
+    DocumentForm, Document,
+    RefereesForm, Referees
 )
 
 # Create your views here.
@@ -69,9 +71,12 @@ def dashboard(request):
 
 @login_required
 def profile(request):
-    applicant = get_or_none(Applicant, user=request.user)
-    academic_info = get_or_none(AcademicInformation, user=request.user)
-    account_bank = get_or_none(AccountBank, user=request.user)
+    user = request.user
+    applicant = get_or_none(Applicant, user=user)
+    academic_info = get_or_none(AcademicInformation, user=user)
+    account_bank = get_or_none(AccountBank, user=user)
+    documents = get_or_none(Document, user=user)
+    referees = get_or_none(Referees, user=user)
 
     return render(
         request, 'users/profile', 
@@ -80,4 +85,6 @@ def profile(request):
         applicant_form = ApplicantForm(instance=applicant),
         academic_form = AcademicInformationForm(instance=academic_info),
         bank_form = AccountBankForm(instance=account_bank),
+        documents_form = DocumentForm(instance=documents),
+        referees_form = RefereesForm(instance=referees)
     )

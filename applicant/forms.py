@@ -22,6 +22,7 @@ class ApplicantForm(forms.ModelForm):
         self.fields['contact_address'].widget.attrs['placeholder'] = 'Enter contact address here...'
         
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
                 Column('guardian_name', css_class='form-group col-md-6 mb-0'),
@@ -63,6 +64,7 @@ class AcademicInformationForm(forms.ModelForm):
         self.fields['course'].empty_label = 'Select course of study'
         
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
                 Column('institution', css_class='form-group col-md-6 mb-0'),
@@ -90,6 +92,7 @@ class AccountBankForm(forms.ModelForm):
         self.fields['account_name'].widget.attrs['placeholder'] = 'Enter your account name here...'
         
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
                 Column('bank', css_class='form-group col-md-6 mb-0'),
@@ -97,4 +100,59 @@ class AccountBankForm(forms.ModelForm):
                 css_class='form-row'
             ),
             'account_name'
+        )
+        
+class DocumentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Document
+        exclude = ('user',)
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Row(
+                Column('national_id_card', css_class='form-group col-md-6 mb-0'),
+                Column('indigen_letter', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('ssce_certificate', css_class='form-group col-md-6 mb-0'),
+                Column('primary_certificate', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('admission_letter', css_class='form-group col-md-6 mb-0'),
+                Column('reciept', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            
+        )
+
+
+class RefereesForm(forms.ModelForm):
+    
+    class Meta:
+        model = Referees
+        exclude = ("user",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.fields['fullname'].widget.attrs['placeholder'] = 'Enter referees fullname here...'
+        self.fields['occupation'].widget.attrs['placeholder'] = 'Enter occupation here...'
+        self.fields['phone_number'].widget.attrs['placeholder'] = 'Enter referees fullname here...'
+        
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            'fullname',
+            Row(
+                Column('phone_number', css_class='form-group col-md-6 mb-0'),
+                Column('occupation', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            )
         )

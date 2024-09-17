@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from crispy_forms.layout import Layout, Row, Column
 from crispy_forms.helper import FormHelper
 
@@ -19,6 +19,7 @@ class UserForm(forms.ModelForm):
         self.fields['last_name'].widget.attrs['required'] = True
         
         self.helper = FormHelper()
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             Row(
                 Column('first_name', css_class='form-group col-md-6 mb-0'),
