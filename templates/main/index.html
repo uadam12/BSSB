@@ -4,12 +4,12 @@
     Welcome to Borno State Scholarship Board
 </h1>
 
-<div class="row">
-    <div class="col-ms">
+<div class="row align-items-center">
+    <div class="col-lg-6">
         <img src="/media/logo.png" alt="BSSB" class="img-fluid">
     </div>
 
-    <div class="col-sm">
+    <div class="col-lg-6">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias in ex iusto libero inventore atque deleniti perspiciatis ipsa ut, illum recusandae veritatis molestiae, odio, quasi nobis aspernatur numquam iure explicabo!</p>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi asperiores, cumque voluptates iure eius eos quam, repudiandae beatae obcaecati harum, sequi veniam nam reprehenderit cum consectetur numquam veritatis commodi fuga.</p>
         <p>
@@ -18,3 +18,8 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block body_end %}
+{% load static %}
+<script src="{% static 'js/themeSwitcher.js' %}"></script>
+{% endblock body_end %}
