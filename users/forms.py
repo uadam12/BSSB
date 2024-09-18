@@ -30,11 +30,9 @@ class UserForm(forms.ModelForm):
 
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,7 +42,6 @@ class RegisterForm(UserCreationForm):
         self.fields['last_name'].widget.attrs['placeholder'] = 'Enter your lastname here...'
         self.fields['last_name'].widget.attrs['required'] = True
         self.fields['email'].widget.attrs['placeholder'] = 'Enter your email address here...'
-        self.fields['username'].widget.attrs['placeholder'] = 'Enter your username here...'
         self.fields['password1'].widget.attrs['placeholder'] = 'Create strong password here...'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm your password here...'
 
@@ -56,11 +53,7 @@ class RegisterForm(UserCreationForm):
                 css_class='form-row'
             ),
             
-            Row(
-                Column('email', css_class='form-group col-md-6 mb-0'),
-                Column('username', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
+            'email',
             
             Row(
                 Column('password1', css_class='form-group col-md-6 mb-0'),
